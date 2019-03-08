@@ -9,12 +9,14 @@ import {ArtistsService} from "./app-services/services/artists.service";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { GiphyComponent } from './giphy/giphy.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArtistsComponent,
     GiphyComponent,
+    IndexComponent,
   ],
   imports: [
     FormsModule,
