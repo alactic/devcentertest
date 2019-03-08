@@ -1,0 +1,120 @@
+<div class="modal fade" id="openSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Songs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngIf="songcontent?.length > 0">
+          <div class="col-12 table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Song Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Links</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let data of songcontent; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{data?.id}}</td>
+                <td>{{data?.title}}</td>
+                <td>{{data?.link}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col mt-3">
+      <form>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Artist ID</label>
+          <div class="col-sm-10">
+            <input type="number" (change)="getId($event)" class="form-control" id="inputEmail3"
+                   placeholder="Enter the artist ID" value="Artist ID">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button type="submit" (click)="search()" class="btn btn-primary float-right">
+              <i class="fa fa-spin fa-spinner" *ngIf="loader"></i> Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <img [src]="content?.picture" *ngIf="content?.picture">
+    </div>
+    <div class="col" *ngIf="content?.id">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 ">ID</div>
+        <div class="col-sm-8 col-md-8 col-lg-8 ">{{content?.id}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 ">Name of Artist</div>
+        <div class="col-sm-8 col-md-8 col-lg-8 ">{{content?.name}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 ">Link to artist's music</div>
+        <div class="col-sm-8 col-md-8 col-lg-8 ">{{content?.link}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <button class="btn btn-primary btn-sm" (click)="getRelated(content?.id)">
+            <i class="fa fa-spin fa-spinner" *ngIf="loadRelated"></i> Click Here to get related articts
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="relatedcontent?.length > 0">
+    <div class="col-12 table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Deezer Id</th>
+          <th scope="col">Name of Artist</th>
+          <th scope="col">Links</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of relatedcontent; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{data?.id}}</td>
+          <td>{{data?.name}}</td>
+          <td>{{data?.link}}</td>
+          <td>
+            <button class="btn btn-sm btn-success" (click)="getArtistSongs(data?.id)">
+              <i class="fa fa-spinner fa-spin" *ngIf="loadsong && artistId === data?.id"></i>View Songs
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
