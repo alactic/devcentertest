@@ -10,6 +10,7 @@ declare const $;
 })
 export class ArtistsComponent implements OnInit {
   public id = 0;
+  public relateArtistName = '';
   public artistId = 0;
   public loader = false;
   public loadsong = false;
@@ -63,10 +64,11 @@ export class ArtistsComponent implements OnInit {
       });
   }
 
-  getArtistSongs(id) {
+  getArtistSongs(data) {
     this.loadsong = true;
-    this.artistId = id;
-    const param = id + '/top?limit=10';
+    this.relateArtistName = data.name;
+    this.artistId = data.id;
+    const param = data.id + '/top?limit=10';
     this.artistservice.getArtist(param)
       .subscribe(response => {
         this.loadsong = false;
