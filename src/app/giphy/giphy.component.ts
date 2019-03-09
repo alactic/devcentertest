@@ -25,7 +25,7 @@ export class GiphyComponent implements OnInit {
     this.giphy.search('rainbow', function (err, res) {
       res.data.forEach(value => {
         gifImage.push(value['images']['original']['url']);
-      })
+      });
     });
     this.gifImages = gifImage;
   }
@@ -49,7 +49,7 @@ export class GiphyComponent implements OnInit {
     $('#giflist').animate({display: 'block'}, 300).hide().slideDown(400).stop();
   }
 
-  closeGif(){
+  closeGif() {
     this.openGif = false;
     $('#giflist').animate({display: 'none'}, 300).slideUp(400).stop();
   }

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GiphyComponent } from './giphy.component';
+import {GiphyComponent} from './giphy.component';
 
 describe('GiphyComponent', () => {
   let component: GiphyComponent;
@@ -8,9 +8,9 @@ describe('GiphyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GiphyComponent ]
+      declarations: [GiphyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,10 @@ describe('GiphyComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should retrieve array of  giph image', () => {
+    spyOn(component, 'getSearch').and.returnValue([{name: 'image'}, {name2: 'image2'}])
     expect(component).toBeTruthy();
+    expect(component.getSearch()).toBeDefined;
+    expect(component.getSearch()).toContain({name: 'image'});
   });
 });

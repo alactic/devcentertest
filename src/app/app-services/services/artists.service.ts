@@ -5,7 +5,7 @@ import {ApiHandlerService} from "../../../services/api-handler.service";
   providedIn: 'root'
 })
 export class ArtistsService {
-  private artist_url = 'https://deezerdevs-deezer.p.rapidapi.com/artist/'
+  public artist_url = 'https://deezerdevs-deezer.p.rapidapi.com/artist/'
 
   constructor(private apiservice: ApiHandlerService) {
   }

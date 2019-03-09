@@ -30,10 +30,8 @@ export class ArtistsComponent implements OnInit {
       .subscribe(response => {
         this.loader = false;
         this.content = response;
-        console.log('response :: ', response);
       }, error => {
         this.loader = false;
-        console.log('error :: ', error);
       });
   }
 
