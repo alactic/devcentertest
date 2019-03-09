@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {ArtistsService} from "../app-services/services/artists.service";
+import {Component, OnInit} from '@angular/core';
+import {ArtistsService} from '../app-services/services/artists.service';
 
 declare const $;
 
@@ -14,7 +14,7 @@ export class ArtistsComponent implements OnInit {
   public loader = false;
   public loadsong = false;
   public loadRelated = false;
-  public relatedcontent: any;
+  public relatedcontent = [];
   public songcontent: any;
   public content: any;
 
@@ -26,10 +26,13 @@ export class ArtistsComponent implements OnInit {
 
   getArtist(id) {
     this.loader = true;
+    this.relatedcontent = [];
+    this.content = {};
     this.artistservice.getArtist(id)
       .subscribe(response => {
         this.loader = false;
         this.content = response;
+        this.getRelated(response['id']);
       }, error => {
         this.loader = false;
       });
@@ -62,14 +65,13 @@ export class ArtistsComponent implements OnInit {
 
   getArtistSongs(id) {
     this.loadsong = true;
-    this.artistId= id;
+    this.artistId = id;
     const param = id + '/top?limit=10';
     this.artistservice.getArtist(param)
       .subscribe(response => {
         this.loadsong = false;
         this.songcontent = response['data'];
         $('#openSong').modal('show');
-        console.log('response song :: ', response);
       }, error => {
         this.loadsong = false;
         console.log('error :: ', error);
