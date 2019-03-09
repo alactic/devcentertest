@@ -1,7 +1,26 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let data of gifImages">
+    <!--<div *ngFor="let data of gifImages">
       <img  [src]="data" /><br/>
+    </div>-->
+    <div class="col float-right">
+      <span id="myPix" class="float-right"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col fixed-bottom">
+      <div class="row">
+        <div id="giflist" class="col" style="display: none">
+
+          <div *ngFor="let data of gifImages" style="height: 30px; width: 30px; float: left; margin: 5px;">
+            <img  [src]="data" style="height: 30px; width: 30px" (click)="onselectgif(data)"/><br/>
+          </div>
+        </div>
+      </div>
+      <input type="text" id="input" style="width: 80%" (keyup)="onInput($event)">
+      <button class="btn btn-sm btn-primary margin-5" (click)="send()">Send</button>
+      <button class="btn btn-sm btn-primary margin-5" *ngIf="!openGif" (click)="addGif()">add GIF</button>
+      <button class="btn btn-sm btn-primary margin-5" *ngIf="openGif" (click)="closeGif()">close giphy</button>
     </div>
   </div>
 </div>
